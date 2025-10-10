@@ -1,6 +1,11 @@
-# Étape 1: Dépendances PHP avec Composer
-FROM composer:2 as vendor
+# Étape 1: Dépendances PHP avec Composer, en utilisant PHP 8.3
+FROM php:8.3-cli-alpine as vendor
 WORKDIR /app
+
+# Installer Composer
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+
+# Copier les fichiers et installer
 COPY database/ database/
 COPY composer.json composer.json
 COPY composer.lock composer.lock
