@@ -10,7 +10,6 @@ RUN composer install --no-interaction --no-dev --optimize-autoloader
 FROM node:18 as frontend
 WORKDIR /app
 COPY package.json package.json
-COPY package-lock.json package-lock.json
 RUN npm install
 COPY . .
 RUN npm run build
