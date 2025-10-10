@@ -8,7 +8,7 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 COPY database/ database/
 COPY composer.json composer.json
 COPY composer.lock composer.lock
-RUN composer install --no-interaction --no-dev --optimize-autoloader
+RUN composer install --no-interaction --no-dev --optimize-autoloader -vvv
 
 # Étape 2: Dépendances Frontend avec Node
 # On construit les assets CSS/JS dans une image Node séparée.
