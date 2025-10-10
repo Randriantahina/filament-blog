@@ -15,7 +15,7 @@ COPY . .
 RUN npm run build
 
 # Étape 3: Image finale de production
-FROM php:8.2-fpm-alpine
+FROM php:8.3-fpm-alpine
 WORKDIR /var/www/html
 
 # Installation des dépendances système et des extensions PHP
