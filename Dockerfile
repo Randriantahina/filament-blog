@@ -24,7 +24,7 @@ FROM php:8.2-fpm-alpine
 WORKDIR /var/www/html
 
 # Installation des dépendances système et des extensions PHP
-RUN apk add --no-cache nginx supervisor curl libzip-dev libpng-dev libjpeg-turbo-dev freetype-dev \
+RUN apk add --no-cache nginx supervisor curl libzip-dev libpng-dev libjpeg-turbo-dev freetype-dev postgresql-dev \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-install pdo pdo_pgsql zip gd bcmath exif \
     && docker-php-ext-enable opcache
