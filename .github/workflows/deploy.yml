@@ -21,7 +21,7 @@ jobs:
           coverage: none
 
       - name: Install Composer Dependencies
-        run: composer install --prefer-dist --no-progress --no-dev
+        run: composer install --prefer-dist --no-progress
 
       - name: Run Tests
         run: |
