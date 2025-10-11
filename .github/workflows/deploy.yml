@@ -1,18 +1,13 @@
-# Ce workflow est destiné à l'Intégration Continue (CI).
-# Son rôle est de lancer les tests pour valider le code avant le déploiement.
-# Le Déploiement Continu (CD) est géré automatiquement par DigitalOcean
-# qui surveille la branche `main` et déploie si les tests réussissent.
-
-name: Laravel CI
+name: Deploy to Render
 
 on:
   push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
+    branches:
+      - main
 
 jobs:
-  laravel-tests:
+  deploy:
+    name: Deploy
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -21,16 +16,19 @@ jobs:
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.3' # Assurez-vous que cette version correspond à votre projet
-
-      - name: Copy .env
-        run: php -r "file_exists('.env') || copy('.env.example', '.env');"
+          php-version: '8.2' # Assurez-vous que cela correspond à votre environnement
+          extensions: mbstring, xml, ctype, json, tokenizer, bcmath
+          coverage: none
 
       - name: Install Composer Dependencies
-        run: composer install -q --no-progress --no-interaction --prefer-dist
+        run: composer install --prefer-dist --no-progress
 
-      - name: Generate app key
-        run: php artisan key:generate
+      - name: Run Tests
+        run: |
+          cp .env.example .env
+          php artisan key:generate
+          ./vendor/bin/phpunit
 
-      - name: Execute tests
-        run: php artisan test
+      - name: Trigger Render Deploy
+        if: success()
+        run: curl -X POST ${{ secrets.RENDER_DEPLOY_HOOK_URL }}
