@@ -16,7 +16,7 @@ jobs:
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.2' # Assurez-vous que cela correspond à votre environnement
+          php-version: '8.3' # Assurez-vous que cela correspond à votre environnement
           extensions: mbstring, xml, ctype, json, tokenizer, bcmath
           coverage: none
 
