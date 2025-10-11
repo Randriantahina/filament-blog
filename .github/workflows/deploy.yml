@@ -1,13 +1,18 @@
-name: Deploy to Railway
+# Ce workflow est destiné à l'Intégration Continue (CI).
+# Son rôle est de lancer les tests pour valider le code avant le déploiement.
+# Le Déploiement Continu (CD) est géré automatiquement par DigitalOcean
+# qui surveille la branche `main` et déploie si les tests réussissent.
+
+name: Laravel CI
 
 on:
   push:
-    branches:
-      - main
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
 
 jobs:
-  deploy:
-    name: Deploy
+  laravel-tests:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -16,23 +21,17 @@ jobs:
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.3'
-          extensions: mbstring, xml, ctype, json, tokenizer, bcmath, pdo, zip, gd, intl
-          coverage: none
+          php-version: '8.3' # Assurez-vous que cette version correspond à votre projet
+
+      - name: Copy .env
+        run: php -r "file_exists('.env') || copy('.env.example', '.env');"
 
       - name: Install Composer Dependencies
-        run: composer install --prefer-dist --no-progress --no-dev --optimize-autoloader
+        run: composer install -q --no-progress --no-interaction --prefer-dist
 
-      - name: Run Tests
-        run: |
-          cp .env.example .env
-          php artisan key:generate
-          ./vendor/bin/phpunit
+      - name: Generate app key
+        run: php artisan key:generate
 
-      - name: Deploy to Railway
-        if: success()
-        env:
-          RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
-        run: |
-          npm install -g @railway/cli
-          railway up
+      - name: Execute tests
+        run: php artisan test
+
