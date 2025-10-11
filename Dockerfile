@@ -12,6 +12,8 @@ COPY composer.json composer.json
 COPY composer.lock composer.lock
 COPY .env.example .env
 RUN chmod 0666 .env
+RUN mkdir -p storage bootstrap/cache \
+    && chmod -R 777 storage bootstrap/cache
 RUN composer install --no-interaction --no-dev --optimize-autoloader --no-scripts -vvv
 RUN php artisan key:generate
 RUN php artisan package:discover --ansi
