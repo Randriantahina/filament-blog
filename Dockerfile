@@ -11,6 +11,7 @@ COPY database/ database/
 COPY composer.json composer.json
 COPY composer.lock composer.lock
 COPY .env.example .env
+RUN php artisan key:generate
 RUN composer install --no-interaction --no-dev --optimize-autoloader -vvv
 
 # Étape 2: Dépendances Frontend avec Node
