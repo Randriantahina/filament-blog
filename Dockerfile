@@ -2,7 +2,9 @@
 # On utilise une image PHP 8.3, on y installe les dépendances système et l'extension 'intl'
 # puis on copie l'exécutable de Composer pour installer les dépendances du projet.
 FROM php:8.3-cli-alpine as vendor
-RUN apk add --no-cache icu-dev && docker-php-ext-install intl
+RUN apk add --no-cache icu-dev libzip-dev libpng-dev libjpeg-turbo-dev freetype-dev postgresql-dev \
+    && docker-php-ext-configure gd --with-freetype --with-jpeg \
+    && docker-php-ext-install intl pdo pdo_pgsql zip gd bcmath exif
 WORKDIR /app
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 COPY database/ database/
