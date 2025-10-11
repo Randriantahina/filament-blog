@@ -11,8 +11,9 @@ COPY database/ database/
 COPY composer.json composer.json
 COPY composer.lock composer.lock
 COPY .env.example .env
+RUN composer install --no-interaction --no-dev --optimize-autoloader --no-scripts -vvv
 RUN php artisan key:generate
-RUN composer install --no-interaction --no-dev --optimize-autoloader -vvv
+RUN php artisan package:discover --ansi
 
 # Étape 2: Dépendances Frontend avec Node
 # On construit les assets CSS/JS dans une image Node séparée.
