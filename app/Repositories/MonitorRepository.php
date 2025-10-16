@@ -47,7 +47,7 @@ class MonitorRepository implements MonitorRepositoryInterface
 
         return $monitors->filter(function ($monitor) {
             if (is_null($monitor->last_checked_at)) {
-                return true; // Always check if never checked before
+                return true; /
             }
 
             return $monitor->last_checked_at->addMinutes($monitor->check_interval_minutes)->isPast();
