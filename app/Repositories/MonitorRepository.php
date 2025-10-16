@@ -43,14 +43,15 @@ class MonitorRepository implements MonitorRepositoryInterface
 
     public function getMonitorsDueForCheck(): Collection
     {
-        // This will be refined later when we implement the scheduler and job
-        // For now, it returns all monitors that are not paused.
-        return Monitor::where('uptime_status', '!=', \App\Enums\MonitorStatus::Paused->value)
-                      ->where(function ($query) {
-                          $query->whereNull('last_checked_at')
-                                ->orWhereRaw('last_checked_at <= DATE_SUB(NOW(), INTERVAL check_interval_minutes MINUTE)');
-                      })
-                      ->get();
+        $monitors = Monitor::where('uptime_status', '!=', \App\Enums\MonitorStatus::Paused->value)->get();
+
+        return $monitors->filter(function ($monitor) {
+            if (is_null($monitor->last_checked_at)) {
+                return true; // Always check if never checked before
+            }
+
+            return $monitor->last_checked_at->addMinutes($monitor->check_interval_minutes)->isPast();
+        });
     }
 
     public function updateUptimeStatus(Monitor $monitor, string $status): bool
