@@ -9,16 +9,18 @@ use Illuminate\Support\Carbon;
 
 class MonitorChartWidget extends ChartWidget
 {
-    protected static ?string $heading = 'Monitor Status (Last 24 Hours)';
+    protected static ?string $heading = "Monitor Status (Last 24 Hours)";
+    protected int|string|array $columnSpan = "full";
+    protected static ?int $sort = 2;
 
     protected function getData(): array
     {
         $data = CheckLog::query()
-            ->where('created_at', '>=', now()->subDay())
-            ->orderBy('created_at')
+            ->where("created_at", ">=", now()->subDay())
+            ->orderBy("created_at")
             ->get()
             ->groupBy(function ($log) {
-                return Carbon::parse($log->created_at)->format('H');
+                return Carbon::parse($log->created_at)->format("H");
             });
 
         $labels = [];
@@ -26,31 +28,41 @@ class MonitorChartWidget extends ChartWidget
         $downData = [];
 
         for ($i = 0; $i < 24; $i++) {
-            $hour = now()->subHours(23 - $i)->format('H');
-            $labels[] = $hour . ':00';
-            $upData[] = $data->get($hour)?->where('status', MonitorStatus::Up)->count() ?? 0;
-            $downData[] = $data->get($hour)?->where('status', MonitorStatus::Down)->count() ?? 0;
+            $hour = now()
+                ->subHours(23 - $i)
+                ->format("H");
+            $labels[] = $hour . ":00";
+            $upData[] =
+                $data
+                    ->get($hour)
+                    ?->where("status", MonitorStatus::Up)
+                    ->count() ?? 0;
+            $downData[] =
+                $data
+                    ->get($hour)
+                    ?->where("status", MonitorStatus::Down)
+                    ->count() ?? 0;
         }
 
         return [
-            'datasets' => [
+            "datasets" => [
                 [
-                    'label' => 'Monitors Up',
-                    'data' => $upData,
-                    'borderColor' => '#22c55e',
+                    "label" => "Monitors Up",
+                    "data" => $upData,
+                    "borderColor" => "#22c55e",
                 ],
                 [
-                    'label' => 'Monitors Down',
-                    'data' => $downData,
-                    'borderColor' => '#ef4444',
+                    "label" => "Monitors Down",
+                    "data" => $downData,
+                    "borderColor" => "#ef4444",
                 ],
             ],
-            'labels' => $labels,
+            "labels" => $labels,
         ];
     }
 
     protected function getType(): string
     {
-        return 'line';
+        return "line";
     }
 }

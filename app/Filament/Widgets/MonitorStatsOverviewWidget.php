@@ -10,7 +10,6 @@ use Filament\Widgets\StatsOverviewWidget\Stat;
 class MonitorStatsOverviewWidget extends BaseWidget
 {
     protected static ?int $sort = 1;
-
     protected function getStats(): array
     {
         $monitorRepository = app(MonitorRepositoryInterface::class);
