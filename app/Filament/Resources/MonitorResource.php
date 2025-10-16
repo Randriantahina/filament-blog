@@ -123,6 +123,7 @@ class MonitorResource extends Resource
                 Tables\Columns\TextColumn::make('name')
                     ->searchable(),
                 Tables\Columns\BadgeColumn::make('uptime_status')
+                    ->formatStateUsing(fn (\App\Enums\MonitorStatus $state): string => $state->value)
                     ->label('Status')
                     ->colors([
                         'success' => 'up',
