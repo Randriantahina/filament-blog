@@ -9,7 +9,9 @@ use Illuminate\Support\Carbon;
 
 class MonitorChartWidget extends ChartWidget
 {
-    protected static ?string $heading = "Monitor Status (Last 24 Hours)";
+    protected static ?string $heading = 'Monitor Status (Last 24 Hours)';
+
+    protected static ?string $pollingInterval = '15s';
     protected int|string|array $columnSpan = "full";
     protected static ?int $sort = 2;
 
@@ -32,16 +34,8 @@ class MonitorChartWidget extends ChartWidget
                 ->subHours(23 - $i)
                 ->format("H");
             $labels[] = $hour . ":00";
-            $upData[] =
-                $data
-                    ->get($hour)
-                    ?->where("status", MonitorStatus::Up)
-                    ->count() ?? 0;
-            $downData[] =
-                $data
-                    ->get($hour)
-                    ?->where("status", MonitorStatus::Down)
-                    ->count() ?? 0;
+            $upData[] = $data->get($hour)?->where('is_up', true)->count() ?? 0;
+            $downData[] = $data->get($hour)?->where('is_up', false)->count() ?? 0;
         }
 
         return [
@@ -63,6 +57,6 @@ class MonitorChartWidget extends ChartWidget
 
     protected function getType(): string
     {
-        return "line";
+        return 'line';
     }
 }
