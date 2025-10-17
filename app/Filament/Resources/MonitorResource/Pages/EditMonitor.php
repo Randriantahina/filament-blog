@@ -23,9 +23,9 @@ class EditMonitor extends EditRecord
             throw new \Exception("Authenticated user not found.");
         }
 
-        $dto = MonitorDto::from([...$data, "user_id" => $currentUser->id]);
+        unset($data["user_id"]);
 
-        return $monitorService->updateMonitor($record->id, $dto);
+        return $monitorService->updateMonitor($record->id, $data);
     }
 
     protected function getHeaderActions(): array

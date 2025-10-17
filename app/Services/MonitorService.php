@@ -9,7 +9,7 @@ use App\Repositories\Contracts\MonitorRepositoryInterface;
 class MonitorService
 {
     public function __construct(
-        protected MonitorRepositoryInterface $monitorRepository
+        protected MonitorRepositoryInterface $monitorRepository,
     ) {}
 
     public function createMonitor(MonitorDto $dto): Monitor
@@ -17,9 +17,9 @@ class MonitorService
         return $this->monitorRepository->create($dto->toArray());
     }
 
-    public function updateMonitor(int $id, MonitorDto $dto): ?Monitor
+    public function updateMonitor(int $id, array $data): ?Monitor
     {
-        $this->monitorRepository->update($id, $dto->toArray());
+        $this->monitorRepository->update($id, $data);
         return $this->monitorRepository->find($id);
     }
 

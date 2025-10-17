@@ -61,4 +61,8 @@ class Monitor extends Model
     {
         return $this->belongsToMany(StatusPage::class, "monitor_status_page");
     }
+    public function alertContacts(): BelongsToMany
+    {
+        return $this->belongsToMany(AlertContact::class);
+    }
 }
