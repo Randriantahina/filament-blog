@@ -22,6 +22,11 @@ class AppServiceProvider extends ServiceProvider
             \App\Repositories\Contracts\AlertContactRepositoryInterface::class,
             \App\Repositories\AlertContactRepository::class,
         );
+
+        $this->app->bind(
+            \App\Repositories\Contracts\StatusPageRepositoryInterface::class,
+            \App\Repositories\StatusPageRepository::class
+        );
     }
 
     /**

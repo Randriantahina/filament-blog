@@ -2,14 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\StatusPage;
-use Illuminate\Http\Request;
+use App\Services\StatusPageService;
 
 class StatusPageController extends Controller
 {
-    public function show(StatusPage $statusPage)
+    public function __construct(protected StatusPageService $statusPageService)
     {
-        $statusPage->load('monitors.checkLogs');
+    }
+
+    public function show(string $slug)
+    {
+        $statusPage = $this->statusPageService->getPageForPublicView($slug);
 
         return view('status-page', compact('statusPage'));
     }
