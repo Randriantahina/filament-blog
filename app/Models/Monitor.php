@@ -65,4 +65,8 @@ class Monitor extends Model
     {
         return $this->belongsToMany(AlertContact::class);
     }
+    public function maintenanceWindows(): BelongsToMany
+    {
+        return $this->belongsToMany(MaintenanceWindow::class);
+    }
 }

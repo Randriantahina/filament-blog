@@ -15,7 +15,12 @@ class AppServiceProvider extends ServiceProvider
     {
         $this->app->bind(
             MonitorRepositoryInterface::class,
-            MonitorRepository::class
+            MonitorRepository::class,
+        );
+
+        $this->app->bind(
+            \App\Repositories\Contracts\AlertContactRepositoryInterface::class,
+            \App\Repositories\AlertContactRepository::class,
         );
     }
 

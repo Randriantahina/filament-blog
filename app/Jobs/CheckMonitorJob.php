@@ -28,6 +28,16 @@ class CheckMonitorJob implements ShouldQueue
         MonitorRepositoryInterface $monitorRepository,
         CheckLogService $checkLogService,
     ): void {
+        $isUnderMaintenance = $this->monitor
+            ->maintenanceWindows()
+            ->where("starts_at", "<==", now())
+            ->where("ends_at", ">==", now())
+            ->exists();
+
+        if ($isUnderMaintenance) {
+            return;
+        }
+
         if ($this->monitor->type === MonitorType::Heartbeat) {
             return;
         }

@@ -44,19 +44,17 @@ class AlertContactResource extends Resource
                 Tables\Columns\TextColumn::make("name")
                     ->searchable()
                     ->sortable(),
-                Tables\Columns\TextColumn::make("type")
-                    ->badge() // Le badge est sympa pour le type
-                    ->sortable(),
+                Tables\Columns\TextColumn::make("type")->badge()->sortable(),
                 Tables\Columns\TextColumn::make("value")
-                    ->label("Destination") // Un label plus clair que "value"
+                    ->label("Destination")
                     ->searchable(),
-                Tables\Columns\TextColumn::make("user.name") // Affiche le nom de l'utilisateur
+                Tables\Columns\TextColumn::make("user.name")
                     ->label("Owner")
                     ->sortable(),
                 Tables\Columns\TextColumn::make("created_at")
                     ->dateTime()
                     ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true), // Caché par défaut pour ne pas surcharger
+                    ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
                 //
