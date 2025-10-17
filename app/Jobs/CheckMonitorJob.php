@@ -8,6 +8,7 @@ use App\Factory\MonitorCheckerFactory;
 use App\Models\Monitor;
 use App\Repositories\Contracts\MonitorRepositoryInterface;
 use App\Services\CheckLogService;
+use App\Services\MaintenanceWindowService;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
@@ -27,14 +28,9 @@ class CheckMonitorJob implements ShouldQueue
     public function handle(
         MonitorRepositoryInterface $monitorRepository,
         CheckLogService $checkLogService,
+        MaintenanceWindowService $maintenanceWindowService
     ): void {
-        $isUnderMaintenance = $this->monitor
-            ->maintenanceWindows()
-            ->where("starts_at", "<==", now())
-            ->where("ends_at", ">==", now())
-            ->exists();
-
-        if ($isUnderMaintenance) {
+        if ($maintenanceWindowService->isMonitorUnderMaintenance($this->monitor->id)) {
             return;
         }
 

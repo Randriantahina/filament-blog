@@ -27,6 +27,11 @@ class AppServiceProvider extends ServiceProvider
             \App\Repositories\Contracts\StatusPageRepositoryInterface::class,
             \App\Repositories\StatusPageRepository::class
         );
+
+        $this->app->bind(
+            \App\Repositories\Contracts\MaintenanceWindowRepositoryInterface::class,
+            \App\Repositories\MaintenanceWindowRepository::class
+        );
     }
 
     /**
