@@ -13,9 +13,6 @@ use InvalidArgumentException;
 
 class MonitorCheckerFactory
 {
-    /**
-     * A map of monitor types to their corresponding checker classes.
-     */
     protected static array $checkerMap = [
         MonitorType::Http->value => HttpMonitorCheckerService::class,
         MonitorType::Ping->value => PingMonitorCheckerService::class,
@@ -23,12 +20,6 @@ class MonitorCheckerFactory
         MonitorType::Keyword->value => KeywordMonitorCheckerService::class,
     ];
 
-    /**
-     * Create a checker instance for the given monitor.
-     *
-     * @param Monitor $monitor
-     * @return MonitorCheckerInterface
-     */
     public static function make(Monitor $monitor): MonitorCheckerInterface
     {
         $checkerClass = self::$checkerMap[$monitor->type->value] ?? null;
