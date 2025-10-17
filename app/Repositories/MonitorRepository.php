@@ -43,14 +43,20 @@ class MonitorRepository implements MonitorRepositoryInterface
 
     public function getMonitorsDueForCheck(): Collection
     {
-        $monitors = Monitor::where('uptime_status', '!=', \App\Enums\MonitorStatus::Paused->value)->get();
+        $monitors = Monitor::where(
+            "uptime_status",
+            "!=",
+            \App\Enums\MonitorStatus::Paused->value,
+        )->get();
 
         return $monitors->filter(function ($monitor) {
             if (is_null($monitor->last_checked_at)) {
-                return true; /
+                return true;
             }
 
-            return $monitor->last_checked_at->addMinutes($monitor->check_interval_minutes)->isPast();
+            return $monitor->last_checked_at
+                ->addMinutes($monitor->check_interval_minutes)
+                ->isPast();
         });
     }
 
