@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\HeartbeatController;
+use App\Http\Controllers\Api\MonitorController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,3 +16,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/heartbeat/{monitor:uuid}', HeartbeatController::class);
+
+Route::middleware('auth:sanctum')->group(function () {
+    Route::apiResource('monitors', MonitorController::class);
+});
