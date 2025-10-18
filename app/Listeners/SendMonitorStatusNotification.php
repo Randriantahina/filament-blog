@@ -3,43 +3,29 @@
 namespace App\Listeners;
 
 use App\Events\MonitorStatusChanged;
+use App\Factory\NotificationChannelFactory;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Support\Facades\Notification;
-use App\Notifications\MonitorStatusChangedNotification;
 
 class SendMonitorStatusNotification implements ShouldQueue
 {
     use InteractsWithQueue;
 
-    /**
-     * Create the event listener.
-     */
-    public function __construct()
+    public function __construct(private readonly NotificationChannelFactory $factory)
     {
-        //
     }
 
-    /**
-     * Handle the event.
-     */
     public function handle(MonitorStatusChanged $event): void
     {
-        //on recupere tous les contacts associés au moniteur
-        $contacts = $event->monitor->alertContacts()->get();
+        $monitor = $event->monitor;
 
-        //s'il n'y a pas de contact, on ne fait rien
-        if ($contacts->isEmpty()) {
+        if ($monitor->alertContacts->isEmpty()) {
             return;
         }
 
-        Notification::send(
-            $contacts,
-            new MonitorStatusChangedNotification(
-                $event->monitor,
-                $event->oldStatus,
-                $event->newStatus,
-            ),
-        );
+        foreach ($monitor->alertContacts as $contact) {
+            $channel = $this->factory->make($contact);
+            $channel->send($contact, $monitor);
+        }
     }
 }

@@ -4,9 +4,11 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\AlertContactResource\Pages;
 use App\Filament\Resources\AlertContactResource\RelationManagers;
+use App\Enums\AlertContactType;
 use App\Models\AlertContact;
 use Filament\Forms;
 use Filament\Forms\Form;
+use Filament\Forms\Get;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
@@ -22,16 +24,26 @@ class AlertContactResource extends Resource
     public static function form(Form $form): Form
     {
         return $form->schema([
-            Forms\Components\TextInput::make("name")
+            Forms\Components\TextInput::make('name')
                 ->required()
                 ->maxLength(255),
-            Forms\Components\Select::make("type")
-                ->options([
-                    "email" => "Email",
-                ])
-                ->required(),
-            Forms\Components\TextInput::make("value")
-                ->label("Email Address")
+            Forms\Components\Select::make('type')
+                ->options(collect(AlertContactType::cases())->mapWithKeys(fn ($case) => [$case->value => $case->name]))
+                ->required()
+                ->reactive(),
+            Forms\Components\TextInput::make('value')
+                ->label(fn (Get $get) => match ($get('type')) {
+                    'webhook' => 'Webhook URL',
+                    default => 'Email Address',
+                })
+                ->placeholder(fn (Get $get) => match ($get('type')) {
+                    'webhook' => 'https://example.com/webhook',
+                    default => 'user@example.com',
+                })
+                ->rule(fn (Get $get) => match ($get('type')) {
+                    'webhook' => 'url',
+                    default => 'email',
+                })
                 ->required()
                 ->maxLength(255),
         ]);
