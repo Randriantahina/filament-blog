@@ -13,9 +13,7 @@ class EmailChannel implements NotificationChannelInterface
 {
     public function send(AlertContact $alertContact, Monitor $monitor): void
     {
-        Notification::send(
-            new AnonymousNotifiable(),
-            (new MonitorStatusChangedNotification($monitor))->toMail($alertContact->value)
-        );
+        Notification::route('mail', $alertContact->value)
+            ->notify(new MonitorStatusChangedNotification($monitor));
     }
 }
