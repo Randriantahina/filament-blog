@@ -8,9 +8,11 @@
     "require": {
         "php": "^8.3",
         "filament/filament": "^3.2",
+        "laravel/cashier": "^15.2",
         "laravel/framework": "^12.0",
         "laravel/sanctum": "^4.2",
         "laravel/tinker": "^2.10.1",
+        "maartenpaauw/filament-cashier-billing-provider": "^2.2",
         "spatie/laravel-data": "^4.17",
         "spatie/laravel-permission": "^6.21"
     },

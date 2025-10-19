@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "02ab0b6621c9071984c48780cdc473a7",
+    "content-hash": "703f901e75c83f88fb2709b1b21f5cf9",
     "packages": [
         {
             "name": "anourvalar/eloquent-serialize",
@@ -2024,17 +2024,105 @@
             "time": "2025-08-14T18:43:05+00:00"
         },
         {
-            "name": "laravel/framework",
-            "version": "v12.33.0",
+            "name": "laravel/cashier",
+            "version": "v15.7.1",
             "source": {
                 "type": "git",
-                "url": "https://github.com/laravel/framework.git",
-                "reference": "124efc5f09d4668a4dc13f94a1018c524a58bcb1"
+                "url": "https://github.com/laravel/cashier-stripe.git",
+                "reference": "8dd6a6c35fd2eb67857d06438d849254e47de7d1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/124efc5f09d4668a4dc13f94a1018c524a58bcb1",
-                "reference": "124efc5f09d4668a4dc13f94a1018c524a58bcb1",
+                "url": "https://api.github.com/repos/laravel/cashier-stripe/zipball/8dd6a6c35fd2eb67857d06438d849254e47de7d1",
+                "reference": "8dd6a6c35fd2eb67857d06438d849254e47de7d1",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "illuminate/console": "^10.0|^11.0|^12.0",
+                "illuminate/contracts": "^10.0|^11.0|^12.0",
+                "illuminate/database": "^10.0|^11.0|^12.0",
+                "illuminate/http": "^10.0|^11.0|^12.0",
+                "illuminate/log": "^10.0|^11.0|^12.0",
+                "illuminate/notifications": "^10.0|^11.0|^12.0",
+                "illuminate/pagination": "^10.0|^11.0|^12.0",
+                "illuminate/routing": "^10.0|^11.0|^12.0",
+                "illuminate/support": "^10.0|^11.0|^12.0",
+                "illuminate/view": "^10.0|^11.0|^12.0",
+                "moneyphp/money": "^4.0",
+                "nesbot/carbon": "^2.0|^3.0",
+                "php": "^8.1",
+                "stripe/stripe-php": "^16.2",
+                "symfony/console": "^6.0|^7.0",
+                "symfony/http-kernel": "^6.0|^7.0",
+                "symfony/polyfill-intl-icu": "^1.22.1"
+            },
+            "require-dev": {
+                "dompdf/dompdf": "^2.0|^3.0",
+                "mockery/mockery": "^1.0",
+                "orchestra/testbench": "^8.18|^9.0|^10.0",
+                "phpstan/phpstan": "^1.10",
+                "phpunit/phpunit": "^10.4|^11.5"
+            },
+            "suggest": {
+                "dompdf/dompdf": "Required when generating and downloading invoice PDF's using Dompdf (^2.0|^3.0).",
+                "ext-intl": "Allows for more locales besides the default \"en\" when formatting money values."
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Laravel\\Cashier\\CashierServiceProvider"
+                    ]
+                },
+                "branch-alias": {
+                    "dev-master": "15.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Laravel\\Cashier\\": "src/",
+                    "Laravel\\Cashier\\Database\\Factories\\": "database/factories/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Taylor Otwell",
+                    "email": "taylor@laravel.com"
+                },
+                {
+                    "name": "Dries Vints",
+                    "email": "dries@laravel.com"
+                }
+            ],
+            "description": "Laravel Cashier provides an expressive, fluent interface to Stripe's subscription billing services.",
+            "keywords": [
+                "billing",
+                "laravel",
+                "stripe"
+            ],
+            "support": {
+                "issues": "https://github.com/laravel/cashier/issues",
+                "source": "https://github.com/laravel/cashier"
+            },
+            "time": "2025-07-22T15:49:31+00:00"
+        },
+        {
+            "name": "laravel/framework",
+            "version": "v12.34.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laravel/framework.git",
+                "reference": "f9ec5a5d88bc8c468f17b59f88e05c8ac3c8d687"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/f9ec5a5d88bc8c468f17b59f88e05c8ac3c8d687",
+                "reference": "f9ec5a5d88bc8c468f17b59f88e05c8ac3c8d687",
                 "shasum": ""
             },
             "require": {
@@ -2146,7 +2234,7 @@
                 "league/flysystem-sftp-v3": "^3.25.1",
                 "mockery/mockery": "^1.6.10",
                 "opis/json-schema": "^2.4.1",
-                "orchestra/testbench-core": "^10.6.5",
+                "orchestra/testbench-core": "^10.7.0",
                 "pda/pheanstalk": "^5.0.6|^7.0.0",
                 "php-http/discovery": "^1.15",
                 "phpstan/phpstan": "^2.0",
@@ -2240,7 +2328,7 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2025-10-07T14:30:39+00:00"
+            "time": "2025-10-14T13:58:31+00:00"
         },
         {
             "name": "laravel/prompts",
@@ -2367,16 +2455,16 @@
         },
         {
             "name": "laravel/serializable-closure",
-            "version": "v2.0.5",
+            "version": "v2.0.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/serializable-closure.git",
-                "reference": "3832547db6e0e2f8bb03d4093857b378c66eceed"
+                "reference": "038ce42edee619599a1debb7e81d7b3759492819"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/serializable-closure/zipball/3832547db6e0e2f8bb03d4093857b378c66eceed",
-                "reference": "3832547db6e0e2f8bb03d4093857b378c66eceed",
+                "url": "https://api.github.com/repos/laravel/serializable-closure/zipball/038ce42edee619599a1debb7e81d7b3759492819",
+                "reference": "038ce42edee619599a1debb7e81d7b3759492819",
                 "shasum": ""
             },
             "require": {
@@ -2424,7 +2512,7 @@
                 "issues": "https://github.com/laravel/serializable-closure/issues",
                 "source": "https://github.com/laravel/serializable-closure"
             },
-            "time": "2025-09-22T17:29:40+00:00"
+            "time": "2025-10-09T13:42:30+00:00"
         },
         {
             "name": "laravel/tinker",
@@ -2683,16 +2771,16 @@
         },
         {
             "name": "league/csv",
-            "version": "9.26.0",
+            "version": "9.27.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/csv.git",
-                "reference": "7fce732754d043f3938899e5183e2d0f3d31b571"
+                "reference": "cb491b1ba3c42ff2bcd0113814f4256b42bae845"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/csv/zipball/7fce732754d043f3938899e5183e2d0f3d31b571",
-                "reference": "7fce732754d043f3938899e5183e2d0f3d31b571",
+                "url": "https://api.github.com/repos/thephpleague/csv/zipball/cb491b1ba3c42ff2bcd0113814f4256b42bae845",
+                "reference": "cb491b1ba3c42ff2bcd0113814f4256b42bae845",
                 "shasum": ""
             },
             "require": {
@@ -2770,7 +2858,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-10-01T11:24:54+00:00"
+            "time": "2025-10-16T08:22:09+00:00"
         },
         {
             "name": "league/flysystem",
@@ -3211,6 +3299,79 @@
             "time": "2025-07-17T05:12:15+00:00"
         },
         {
+            "name": "maartenpaauw/filament-cashier-billing-provider",
+            "version": "2.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/maartenpaauw/filament-cashier-billing-provider.git",
+                "reference": "398d41f6e9b2141fe6845bf45bd7e0534d71a7b7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/maartenpaauw/filament-cashier-billing-provider/zipball/398d41f6e9b2141fe6845bf45bd7e0534d71a7b7",
+                "reference": "398d41f6e9b2141fe6845bf45bd7e0534d71a7b7",
+                "shasum": ""
+            },
+            "require": {
+                "filament/filament": "^3.2.39",
+                "illuminate/config": "^11.0|^12.0",
+                "illuminate/http": "^11.0|^12.0",
+                "illuminate/support": "^11.0|^12.0",
+                "laravel/cashier": "^15.2",
+                "php": "^8.2"
+            },
+            "require-dev": {
+                "laravel/pint": "^1.0",
+                "pestphp/pest": "^3.7",
+                "spatie/ray": "^1.28"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Maartenpaauw\\Filament\\Cashier\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Maarten Paauw",
+                    "email": "maartenpaauw@gmail.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Filament billing provider for Laravel Cashier",
+            "homepage": "https://github.com/maartenpaauw/filament-cashier-billing-provider",
+            "keywords": [
+                "billing-provider",
+                "cashier",
+                "filament",
+                "laravel",
+                "maartenpaauw"
+            ],
+            "support": {
+                "issues": "https://github.com/maartenpaauw/filament-cashier-billing-provider/issues",
+                "source": "https://github.com/maartenpaauw/filament-cashier-billing-provider/tree/2.2.0"
+            },
+            "funding": [
+                {
+                    "url": "https://filamentphp.com/plugins/maartenpaauw-model-states",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://filamentphp.com/plugins/maartenpaauw-pennant",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/maartenpaauw",
+                    "type": "github"
+                }
+            ],
+            "time": "2025-03-02T09:21:21+00:00"
+        },
+        {
             "name": "masterminds/html5",
             "version": "2.10.0",
             "source": {
@@ -3276,6 +3437,96 @@
                 "source": "https://github.com/Masterminds/html5-php/tree/2.10.0"
             },
             "time": "2025-07-25T09:04:22+00:00"
+        },
+        {
+            "name": "moneyphp/money",
+            "version": "v4.7.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/moneyphp/money.git",
+                "reference": "1a23f0e1b22e2c59ed5ed70cfbe4cbe696be9348"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/moneyphp/money/zipball/1a23f0e1b22e2c59ed5ed70cfbe4cbe696be9348",
+                "reference": "1a23f0e1b22e2c59ed5ed70cfbe4cbe696be9348",
+                "shasum": ""
+            },
+            "require": {
+                "ext-bcmath": "*",
+                "ext-filter": "*",
+                "ext-json": "*",
+                "php": "~8.1.0 || ~8.2.0 || ~8.3.0 || ~8.4.0"
+            },
+            "require-dev": {
+                "cache/taggable-cache": "^1.1.0",
+                "doctrine/coding-standard": "^12.0",
+                "doctrine/instantiator": "^1.5.0 || ^2.0",
+                "ext-gmp": "*",
+                "ext-intl": "*",
+                "florianv/exchanger": "^2.8.1",
+                "florianv/swap": "^4.3.0",
+                "moneyphp/crypto-currencies": "^1.1.0",
+                "moneyphp/iso-currencies": "^3.4",
+                "php-http/message": "^1.16.0",
+                "php-http/mock-client": "^1.6.0",
+                "phpbench/phpbench": "^1.2.5",
+                "phpstan/extension-installer": "^1.4",
+                "phpstan/phpstan": "^2.1.9",
+                "phpstan/phpstan-phpunit": "^2.0",
+                "phpunit/phpunit": "^10.5.9",
+                "psr/cache": "^1.0.1 || ^2.0 || ^3.0",
+                "ticketswap/phpstan-error-formatter": "^1.1"
+            },
+            "suggest": {
+                "ext-gmp": "Calculate without integer limits",
+                "ext-intl": "Format Money objects with intl",
+                "florianv/exchanger": "Exchange rates library for PHP",
+                "florianv/swap": "Exchange rates library for PHP",
+                "psr/cache-implementation": "Used for Currency caching"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Money\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Mathias Verraes",
+                    "email": "mathias@verraes.net",
+                    "homepage": "http://verraes.net"
+                },
+                {
+                    "name": "Márk Sági-Kazár",
+                    "email": "mark.sagikazar@gmail.com"
+                },
+                {
+                    "name": "Frederik Bosch",
+                    "email": "f.bosch@genkgo.nl"
+                }
+            ],
+            "description": "PHP implementation of Fowler's Money pattern",
+            "homepage": "http://moneyphp.org",
+            "keywords": [
+                "Value Object",
+                "money",
+                "vo"
+            ],
+            "support": {
+                "issues": "https://github.com/moneyphp/money/issues",
+                "source": "https://github.com/moneyphp/money/tree/v4.7.1"
+            },
+            "time": "2025-06-06T07:12:38+00:00"
         },
         {
             "name": "monolog/monolog",
@@ -3696,31 +3947,31 @@
         },
         {
             "name": "nunomaduro/termwind",
-            "version": "v2.3.1",
+            "version": "v2.3.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nunomaduro/termwind.git",
-                "reference": "dfa08f390e509967a15c22493dc0bac5733d9123"
+                "reference": "eb61920a53057a7debd718a5b89c2178032b52c0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nunomaduro/termwind/zipball/dfa08f390e509967a15c22493dc0bac5733d9123",
-                "reference": "dfa08f390e509967a15c22493dc0bac5733d9123",
+                "url": "https://api.github.com/repos/nunomaduro/termwind/zipball/eb61920a53057a7debd718a5b89c2178032b52c0",
+                "reference": "eb61920a53057a7debd718a5b89c2178032b52c0",
                 "shasum": ""
             },
             "require": {
                 "ext-mbstring": "*",
                 "php": "^8.2",
-                "symfony/console": "^7.2.6"
+                "symfony/console": "^7.3.4"
             },
             "require-dev": {
-                "illuminate/console": "^11.44.7",
-                "laravel/pint": "^1.22.0",
+                "illuminate/console": "^11.46.1",
+                "laravel/pint": "^1.25.1",
                 "mockery/mockery": "^1.6.12",
-                "pestphp/pest": "^2.36.0 || ^3.8.2",
-                "phpstan/phpstan": "^1.12.25",
+                "pestphp/pest": "^2.36.0 || ^3.8.4",
+                "phpstan/phpstan": "^1.12.32",
                 "phpstan/phpstan-strict-rules": "^1.6.2",
-                "symfony/var-dumper": "^7.2.6",
+                "symfony/var-dumper": "^7.3.4",
                 "thecodingmachine/phpstan-strict-rules": "^1.0.0"
             },
             "type": "library",
@@ -3763,7 +4014,7 @@
             ],
             "support": {
                 "issues": "https://github.com/nunomaduro/termwind/issues",
-                "source": "https://github.com/nunomaduro/termwind/tree/v2.3.1"
+                "source": "https://github.com/nunomaduro/termwind/tree/v2.3.2"
             },
             "funding": [
                 {
@@ -3779,7 +4030,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-05-08T08:14:37+00:00"
+            "time": "2025-10-18T11:10:27+00:00"
         },
         {
             "name": "openspout/openspout",
@@ -5178,16 +5429,16 @@
         },
         {
             "name": "spatie/laravel-data",
-            "version": "4.17.1",
+            "version": "4.18.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/laravel-data.git",
-                "reference": "6ec15bb6798128f01aecb67dcd18a937251a27a5"
+                "reference": "c10784f1133d540a702bd6db36ed659f4bc0606a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-data/zipball/6ec15bb6798128f01aecb67dcd18a937251a27a5",
-                "reference": "6ec15bb6798128f01aecb67dcd18a937251a27a5",
+                "url": "https://api.github.com/repos/spatie/laravel-data/zipball/c10784f1133d540a702bd6db36ed659f4bc0606a",
+                "reference": "c10784f1133d540a702bd6db36ed659f4bc0606a",
                 "shasum": ""
             },
             "require": {
@@ -5249,7 +5500,7 @@
             ],
             "support": {
                 "issues": "https://github.com/spatie/laravel-data/issues",
-                "source": "https://github.com/spatie/laravel-data/tree/4.17.1"
+                "source": "https://github.com/spatie/laravel-data/tree/4.18.0"
             },
             "funding": [
                 {
@@ -5257,7 +5508,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-09-04T08:30:23+00:00"
+            "time": "2025-10-16T16:44:07+00:00"
         },
         {
             "name": "spatie/laravel-package-tools",
@@ -5483,6 +5734,65 @@
                 }
             ],
             "time": "2025-09-22T14:58:17+00:00"
+        },
+        {
+            "name": "stripe/stripe-php",
+            "version": "v16.6.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/stripe/stripe-php.git",
+                "reference": "d6de0a536f00b5c5c74f36b8f4d0d93b035499ff"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/stripe/stripe-php/zipball/d6de0a536f00b5c5c74f36b8f4d0d93b035499ff",
+                "reference": "d6de0a536f00b5c5c74f36b8f4d0d93b035499ff",
+                "shasum": ""
+            },
+            "require": {
+                "ext-curl": "*",
+                "ext-json": "*",
+                "ext-mbstring": "*",
+                "php": ">=5.6.0"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "3.5.0",
+                "phpstan/phpstan": "^1.2",
+                "phpunit/phpunit": "^5.7 || ^9.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Stripe\\": "lib/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Stripe and contributors",
+                    "homepage": "https://github.com/stripe/stripe-php/contributors"
+                }
+            ],
+            "description": "Stripe PHP Library",
+            "homepage": "https://stripe.com/",
+            "keywords": [
+                "api",
+                "payment processing",
+                "stripe"
+            ],
+            "support": {
+                "issues": "https://github.com/stripe/stripe-php/issues",
+                "source": "https://github.com/stripe/stripe-php/tree/v16.6.0"
+            },
+            "time": "2025-02-24T22:35:29+00:00"
         },
         {
             "name": "symfony/clock",
@@ -6707,6 +7017,94 @@
                 }
             ],
             "time": "2025-06-27T09:58:17+00:00"
+        },
+        {
+            "name": "symfony/polyfill-intl-icu",
+            "version": "v1.33.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/polyfill-intl-icu.git",
+                "reference": "bfc8fa13dbaf21d69114b0efcd72ab700fb04d0c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/polyfill-intl-icu/zipball/bfc8fa13dbaf21d69114b0efcd72ab700fb04d0c",
+                "reference": "bfc8fa13dbaf21d69114b0efcd72ab700fb04d0c",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.2"
+            },
+            "suggest": {
+                "ext-intl": "For best performance and support of other locales than \"en\""
+            },
+            "type": "library",
+            "extra": {
+                "thanks": {
+                    "url": "https://github.com/symfony/polyfill",
+                    "name": "symfony/polyfill"
+                }
+            },
+            "autoload": {
+                "files": [
+                    "bootstrap.php"
+                ],
+                "psr-4": {
+                    "Symfony\\Polyfill\\Intl\\Icu\\": ""
+                },
+                "classmap": [
+                    "Resources/stubs"
+                ],
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nicolas Grekas",
+                    "email": "p@tchwork.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony polyfill for intl's ICU-related data and classes",
+            "homepage": "https://symfony.com",
+            "keywords": [
+                "compatibility",
+                "icu",
+                "intl",
+                "polyfill",
+                "portable",
+                "shim"
+            ],
+            "support": {
+                "source": "https://github.com/symfony/polyfill-intl-icu/tree/v1.33.0"
+            },
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://github.com/nicolas-grekas",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2025-06-20T22:24:30+00:00"
         },
         {
             "name": "symfony/polyfill-intl-idn",

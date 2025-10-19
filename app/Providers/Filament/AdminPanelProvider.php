@@ -2,6 +2,8 @@
 
 namespace App\Providers\Filament;
 
+use App\Filament\Pages\Tenancy\RegisterTeam;
+use App\Models\Team;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
@@ -17,11 +19,15 @@ use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
+use Laravel\Cashier\Cashier;
+use Maartenpaauw\Filament\Cashier\Stripe\BillingProvider;
 
 class AdminPanelProvider extends PanelProvider
 {
     public function panel(Panel $panel): Panel
     {
+        Cashier::useCustomerModel(Team::class);
+
         return $panel
             ->default()
             ->id("admin")
@@ -42,6 +48,7 @@ class AdminPanelProvider extends PanelProvider
             ->widgets([
                 \App\Filament\Widgets\MonitorChartWidget::class,
                 \App\Filament\Widgets\MonitorStatsOverviewWidget::class,
+                \App\Filament\Widgets\SubscriptionStatusWidget::class,
             ])
             ->middleware([
                 EncryptCookies::class,
@@ -54,6 +61,19 @@ class AdminPanelProvider extends PanelProvider
                 DisableBladeIconComponents::class,
                 DispatchServingFilamentEvent::class,
             ])
-            ->authMiddleware([Authenticate::class]);
+            ->authMiddleware([Authenticate::class])
+            ->tenant(Team::class, ownershipRelationship: "owner")
+            ->tenantRegistration(RegisterTeam::class)
+            // ->tenantBillingProvider(
+            //     new BillingProvider([
+            //         [
+            //             "name" => "Pro",
+            //             "price" => "price_1SJyUpFmp5cBhFaain0uOSSG",
+            //             "description" =>
+            //                 "Abonnement pour les utilisateurs Pro.",
+            //         ],
+            //     ]),
+            // );
+            ->tenantBillingProvider(new BillingProvider("default"));
     }
 }
